@@ -43,4 +43,4 @@ runs:
       cd $BASEDIR
       ls -la
       ls -la dist
-      ./dist/pdb2pqr
+      ./dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr
