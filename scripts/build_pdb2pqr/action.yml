@@ -45,6 +45,6 @@ runs:
       ls -la
       ls -la dist
       ./dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr
-      if [ ! -f 1CRN.pqrx ]; then
-        exit 1
+      if [ ! -f 1CRN.pqr ]; then
+          exit 1
       fi
