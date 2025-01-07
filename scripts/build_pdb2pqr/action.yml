@@ -1,0 +1,27 @@
+name: 'Build PDB2PQR binary'
+description: 'Build PDB2PQR binary'
+
+inputs:
+  basedir:
+     description: 'base dir'
+     required: true
+
+runs:
+  using: "composite"
+  steps:
+
+  - name: make venv
+    shell: bash
+    run: |
+      BASEDIR=${{ inputs.basedir }}
+      cd $BASEDIR
+      python3 -m venv --prompt apbs_bundle --upgrade-deps .venv
+
+  - name: install pdb2pqr
+    shell: bash
+    run: |
+      BASEDIR=${{ inputs.basedir }}
+      cd $BASEDIR
+      source .venv/bin/activate
+      python3 -m pip install pdb2pqr
+      
