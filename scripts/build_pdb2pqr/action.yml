@@ -24,5 +24,13 @@ runs:
       BASEDIR=${{ inputs.basedir }}
       cd $BASEDIR
       source .venv/bin/activate
-      python3 -m pip install pdb2pqr
+      python3 -m pip install pdb2pqr pyinstaller
       
+  - name: build pdb2pqr binary
+    shell: bash
+    run: |
+      BASEDIR=${{ inputs.basedir }}
+      cd $BASEDIR
+      source .venv/bin/activate
+      set -eux
+      PDB2PQR=$(python -c 'import pdb2pqr; print(pdb2pqr.__path__)')
