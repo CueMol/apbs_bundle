@@ -39,8 +39,12 @@ runs:
   - name: check pdb2pqr binary
     shell: bash
     run: |
+      set -eux
       BASEDIR=${{ inputs.basedir }}
       cd $BASEDIR
       ls -la
       ls -la dist
       ./dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr
+      if [ ! -f 1CRN.pqrx ]; then
+        exit 1
+      fi
