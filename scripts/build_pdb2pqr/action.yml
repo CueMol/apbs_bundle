@@ -36,3 +36,11 @@ runs:
       PDB2PQR=$(python -c 'import pdb2pqr; print(pdb2pqr.__path__[0])')
       echo $PDB2PQR
       pyinstaller $PDB2PQR/__main__.py -n pdb2pqr --onefile --clean --add-data "$PDB2PQR/dat:pdb2pqr/dat"
+  - name: check pdb2pqr binary
+    shell: bash
+    run: |
+      BASEDIR=${{ inputs.basedir }}
+      cd $BASEDIR
+      ls -la
+      ls -la dist
+      ./dist/pdb2pqr
