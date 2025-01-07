@@ -25,14 +25,16 @@ jobs:
             python-version: 3.11
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
 
     - name: Build pdb2pqr binary
-      uses: ./build_scripts/build_pdb2pqr
+      uses: ./scripts/build_pdb2pqr
       with:
         basedir: ${{ github.workspace }}/target
