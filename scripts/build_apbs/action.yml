@@ -65,7 +65,7 @@ runs:
       -DBUILD_DOC=OFF \
       -DBUILD_TOOLS=ON \
       -DENABLE_TESTS=OFF \
-      -DCMAKE_EXE_LINKER_FLAGS=$LINK_FLAGS
+      -DCMAKE_EXE_LINKER_FLAGS="$LINK_FLAGS"
       
       cd $BUILDDIR
       make -j 8
