@@ -24,6 +24,15 @@ runs:
       BUILDDIR=$BASEDIR/build
       INSTALL_DIR=$BASEDIR/target
 
+      # FETK (0c6fdeabe8929acea7481cb1480b5706b343b7e0)
+      git clone https://github.com/Electrostatics/FETK.git
+      cd FETK
+      git checkout 0c6fdeabe8929acea7481cb1480b5706b343b7e0
+      FETK_DIR=$BASEDIR/FETK
+      cd $SRCDIR/externals/fetk
+      ln -s $FETK_DIR/maloc
+      ls -la
+      
       # v1.5.0
       cmake -S $SRCDIR -B $BUILDDIR \
       -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
