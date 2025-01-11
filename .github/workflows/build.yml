@@ -50,12 +50,24 @@ jobs:
         ARTIFACT_NAME: apbs_${{ runner.os }}_${{ runner.arch }}.tar.bz2
       run: |
         set -eux
-        OUTPUT_DIR=${GITHUB_WORKSPACE}/apbs
-        INPUT_DIR=${{ github.workspace }}/pdb2pqr_build
         cd ${GITHUB_WORKSPACE}
+        OUTPUT_DIR=${GITHUB_WORKSPACE}/apbs
         mkdir -p ${OUTPUT_DIR}
-        ls -la $INPUT_DIR
-        cp $INPUT_DIR/dist/pdb2pqr ${OUTPUT_DIR}
+
+        # PDB2PQR
+        INPUT_DIR=${{ github.workspace }}/pdb2pqr_build
+        if [ -d $INPUT_DIR ]; then
+          ls -la $INPUT_DIR
+          cp $INPUT_DIR/dist/pdb2pqr ${OUTPUT_DIR}
+        fi
+
+        # APBS
+        INPUT_DIR=${{ github.workspace }}/apbs_build/target/bin
+        if [ -d $INPUT_DIR ]; then
+          ls -la $INPUT_DIR
+          cp $INPUT_DIR/apbs
+        fi
+
         tar cjvf ${{ env.ARTIFACT_NAME }} apbs
         ls -l ${{ env.ARTIFACT_NAME }}
 
