@@ -1,0 +1,22 @@
+name: 'Check APBS/PDB2PQR build'
+description: 'Check APBS/PDB2PQR build'
+
+inputs:
+  basedir:
+     description: 'base dir'
+     required: true
+
+runs:
+  using: "composite"
+  steps:
+
+  - name: check pdb2pqr binary
+    shell: bash
+    run: |
+      set -eux
+      BASEDIR=${{ inputs.basedir }}
+      cd $BASEDIR
+      ./dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr --apbs-input apbs.in
+      ls -la
+      $BASEDIR/target/apbs apbs.in
+      head 1CRN.pqr.dx
