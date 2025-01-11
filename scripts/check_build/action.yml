@@ -2,7 +2,10 @@ name: 'Check APBS/PDB2PQR build'
 description: 'Check APBS/PDB2PQR build'
 
 inputs:
-  basedir:
+  apbs_build_dir:
+     description: 'base dir'
+     required: true
+  pdb2pqr_build_dir:
      description: 'base dir'
      required: true
 
@@ -14,9 +17,12 @@ runs:
     shell: bash
     run: |
       set -eux
-      BASEDIR=${{ inputs.basedir }}
-      cd $BASEDIR
-      ./dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr --apbs-input apbs.in
+      PDB2PQR_DIR=${{ inputs.pdb2pqr_build_dir }}
+      APBS_DIR=${{ inputs.apbs_build_dir }}
+      TMPDIR=${{ github.workspace }}/tmp
+      mkdir -p $TMPDIR
+      cd $TMPDIR
+      $PDB2PQR_DIR/dist/pdb2pqr --keep-chain --nodebump --noopt ../test_asset/1CRN.pdb 1CRN.pqr --apbs-input apbs.in
       ls -la
-      $BASEDIR/target/apbs apbs.in
+      $APBS_DIR/target/apbs apbs.in
       head 1CRN.pqr.dx

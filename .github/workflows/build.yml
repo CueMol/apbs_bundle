@@ -47,7 +47,8 @@ jobs:
     - name: Check build
       uses: ./scripts/check_build/
       with:
-        basedir: ${{ github.workspace }}/apbs_build
+        apbs_build_dir: ${{ github.workspace }}/apbs_build
+        pdb2pqr_build_dir: ${{ github.workspace }}/pdb2pqr_build
 
     - name: Build artifact
       shell: bash
