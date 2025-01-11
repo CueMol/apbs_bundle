@@ -75,4 +75,4 @@ runs:
       INSTALL_DIR=$BASEDIR/target
 
       ls -la $INSTALL_DIR
-      $INSTALL_DIR/bin/apbs --version
+      bash -c "$INSTALL_DIR/bin/apbs --version; echo"
