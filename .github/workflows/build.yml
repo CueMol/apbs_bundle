@@ -13,7 +13,7 @@ on:
 ###############################################
 
 jobs:
-  build_mac_arm64:
+  build_all:
     name: '${{ matrix.name }}'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -93,3 +93,23 @@ jobs:
       with:
         name: apbs_${{ runner.os }}_${{ runner.arch }}
         path: ${{ env.ARTIFACT_NAME }}
+
+###############################################
+
+  release_build:
+    needs: [build_all]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+        merge-multiple: true
+    - run: |
+        ls -lR
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: artifacts/*.tar.bz2
