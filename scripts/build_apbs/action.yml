@@ -1,0 +1,38 @@
+name: 'Build APBS binary'
+description: 'Build APBS binary'
+
+inputs:
+  basedir:
+     description: 'base dir'
+     required: true
+
+runs:
+  using: "composite"
+  steps:
+
+  - name: download APBS source
+    shell: bash
+    run: |
+      set -eux
+      BASEDIR={{ inputs.basedir }}
+      cd $BASEDIR
+      wget --progress=dot:mega -c https://github.com/Electrostatics/apbs/archive/refs/tags/v1.5.0.tar.gz
+      tar xzf v1.5.0.tar.gz
+
+      SRCDIR=$BASEDIR/apbs-1.5.0
+      BUILDDIR=$BASEDIR/build
+      INSTALL_DIR=$BASEDIR/target
+
+      # v1.5.0
+      cmake -S $SRCDIR -B $BUILDDIR \
+      -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DAPBS_STATIC_BUILD=ON \
+      -DBUILD_DOC=OFF \
+      -DBUILD_TOOLS=ON \
+      -DENABLE_TESTS=OFF \
+
+      cd $BUILDDIR
+      make -j 8
+      make install
+

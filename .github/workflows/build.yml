@@ -34,8 +34,13 @@ jobs:
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
 
-    - name: Build pdb2pqr binary
-      uses: ./scripts/build_pdb2pqr
+    # - name: Build pdb2pqr binary
+    #   uses: ./scripts/build_pdb2pqr
+    #   with:
+    #     basedir: ${{ github.workspace }}/target
+
+    - name: Build apbs binary
+      uses: ./scripts/build_apbs
       with:
         basedir: ${{ github.workspace }}/target
 
