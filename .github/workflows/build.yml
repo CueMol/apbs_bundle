@@ -37,12 +37,12 @@ jobs:
     # - name: Build pdb2pqr binary
     #   uses: ./scripts/build_pdb2pqr
     #   with:
-    #     basedir: ${{ github.workspace }}/target
+    #     basedir: ${{ github.workspace }}/pdb2pqr_build
 
     - name: Build apbs binary
       uses: ./scripts/build_apbs
       with:
-        basedir: ${{ github.workspace }}/target
+        basedir: ${{ github.workspace }}/apbs_build
 
     - name: Build artifact
       shell: bash
@@ -51,7 +51,7 @@ jobs:
       run: |
         set -eux
         OUTPUT_DIR=${GITHUB_WORKSPACE}/apbs
-        INPUT_DIR=${{ github.workspace }}/target
+        INPUT_DIR=${{ github.workspace }}/pdb2pqr_build
         cd ${GITHUB_WORKSPACE}
         mkdir -p ${OUTPUT_DIR}
         ls -la $INPUT_DIR

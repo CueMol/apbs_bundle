@@ -15,6 +15,7 @@ runs:
     run: |
       set -eux
       BASEDIR=${{ inputs.basedir }}
+      mkdir -p $BASEDIR
       cd $BASEDIR
       wget --progress=dot:mega -c https://github.com/Electrostatics/apbs/archive/refs/tags/v1.5.0.tar.gz
       tar xzf v1.5.0.tar.gz
