@@ -65,7 +65,7 @@ jobs:
         INPUT_DIR=${{ github.workspace }}/apbs_build/target/bin
         if [ -d $INPUT_DIR ]; then
           ls -la $INPUT_DIR
-          cp $INPUT_DIR/apbs
+          cp $INPUT_DIR/apbs ${OUTPUT_DIR}
         fi
 
         tar cjvf ${{ env.ARTIFACT_NAME }} apbs
