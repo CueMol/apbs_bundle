@@ -75,4 +75,5 @@ runs:
       INSTALL_DIR=$BASEDIR/target
 
       ls -la $INSTALL_DIR
+      set +e
       $INSTALL_DIR/bin/apbs --version
