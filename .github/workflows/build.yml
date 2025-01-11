@@ -19,15 +19,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # include:
+        include:
+          - os: macos-13
+            name: "MacOS 13 x64 clang"
+            python-version: 3.11
+
         #   - os: macos-14
         #     name: "macOS 14"
         #     python-version: 3.11
 
-        include:
-          - os: ubuntu-22.04
-            name: "Ubuntu 22 x64"
-            python-version: 3.11
+        #   - os: ubuntu-22.04
+        #     name: "Ubuntu 22 x64"
+        #     python-version: 3.11
 
     steps:
     - uses: actions/checkout@v4
