@@ -68,7 +68,6 @@ runs:
   - name: Check built binary
     shell: bash
     run: |
-      set -eux
       BASEDIR=${{ inputs.basedir }}
       mkdir -p $BASEDIR
       cd $BASEDIR
@@ -76,4 +75,4 @@ runs:
       INSTALL_DIR=$BASEDIR/target
 
       ls -la $INSTALL_DIR
-      $INSTALL_DIR/bin/apbs
+      $INSTALL_DIR/bin/apbs --version
