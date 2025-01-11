@@ -66,7 +66,7 @@ runs:
       make install
 
   - name: Check built binary
-    shell: bash
+    shell: bash {0}
     run: |
       BASEDIR=${{ inputs.basedir }}
       mkdir -p $BASEDIR
@@ -75,5 +75,4 @@ runs:
       INSTALL_DIR=$BASEDIR/target
 
       ls -la $INSTALL_DIR
-      set +e
       $INSTALL_DIR/bin/apbs --version
