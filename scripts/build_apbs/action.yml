@@ -20,9 +20,16 @@ runs:
       wget --progress=dot:mega -c https://github.com/Electrostatics/apbs/archive/refs/tags/v1.5.0.tar.gz
       tar xzf v1.5.0.tar.gz
 
+
+  - name: download FETK source
+    shell: bash
+    run: |
+      set -eux
+      BASEDIR=${{ inputs.basedir }}
+      mkdir -p $BASEDIR
+      cd $BASEDIR
+
       SRCDIR=$BASEDIR/apbs-1.5.0
-      BUILDDIR=$BASEDIR/build
-      INSTALL_DIR=$BASEDIR/target
 
       # FETK (0c6fdeabe8929acea7481cb1480b5706b343b7e0)
       git clone https://github.com/Electrostatics/FETK.git
@@ -31,8 +38,20 @@ runs:
       FETK_DIR=$BASEDIR/FETK
       cd $SRCDIR/externals/fetk
       ln -s $FETK_DIR/maloc
-      ls -la
+      # ls -la
       
+  - name: Build APBS
+    shell: bash
+    run: |
+      set -eux
+      BASEDIR=${{ inputs.basedir }}
+      mkdir -p $BASEDIR
+      cd $BASEDIR
+
+      SRCDIR=$BASEDIR/apbs-1.5.0
+      BUILDDIR=$BASEDIR/build
+      INSTALL_DIR=$BASEDIR/target
+
       # v1.5.0
       cmake -S $SRCDIR -B $BUILDDIR \
       -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
@@ -46,3 +65,15 @@ runs:
       make -j 8
       make install
 
+  - name: Check built binary
+    shell: bash
+    run: |
+      set -eux
+      BASEDIR=${{ inputs.basedir }}
+      mkdir -p $BASEDIR
+      cd $BASEDIR
+
+      INSTALL_DIR=$BASEDIR/target
+
+      ls -la $INSTALL_DIR
+      $INSTALL_DIR/bin/apbs
