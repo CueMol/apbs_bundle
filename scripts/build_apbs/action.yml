@@ -54,7 +54,7 @@ runs:
 
       LINK_FLAGS=""
       if [ ${{ runner.os }} == "Linux" ]; then
-        LINK_FLAGS="-DCMAKE_EXE_LINKER_FLAGS=\'-z muldefs\'"
+        LINK_FLAGS="-z muldefs"
       fi
 
       # v1.5.0
@@ -65,7 +65,7 @@ runs:
       -DBUILD_DOC=OFF \
       -DBUILD_TOOLS=ON \
       -DENABLE_TESTS=OFF \
-      $LINK_FLAGS
+      -DCMAKE_EXE_LINKER_FLAGS=$LINK_FLAGS
       
       cd $BUILDDIR
       make -j 8
