@@ -60,7 +60,8 @@ runs:
       -DBUILD_DOC=OFF \
       -DBUILD_TOOLS=ON \
       -DENABLE_TESTS=OFF \
-
+      -DCMAKE_EXE_LINKER_FLAGS='-z muldefs'
+      
       cd $BUILDDIR
       make -j 8
       make install
